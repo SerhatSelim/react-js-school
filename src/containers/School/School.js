@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from '../../axios';
 import StudentList from '../../components/StudentList/StudentList';
 import './School.css';
-import Aux from '../../hoc/Auxiliary/Aux';
+import Aux from '../../hoc/Auxiliary/Aux_';
 import NewStudent from '../../components/NewStudent/NewStudent';
 
 
