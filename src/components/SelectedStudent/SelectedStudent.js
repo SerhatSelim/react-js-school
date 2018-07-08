@@ -15,6 +15,7 @@ class SelectedStudent extends Component {
             this.setState( { selectedStudent: this.props } );
         //     this.setState( {dede : false});
         // }
+        //infinite loop!!!!! TODO:Fix
       }
    
   }
