@@ -6,16 +6,15 @@ import "./SelectedStudent.css";
 class SelectedStudent extends Component {
   state = {
     selectedStudent: null,
-    dede:true
   };
 
   componentDidUpdate() {
-    //   if (this.state.dede) {
+    
         if (this.props.selectedStudent !== null) {
+          if ( !this.state.selectedStudent || (
+            this.state.selectedStudent.selectedStudent && this.state.selectedStudent.selectedStudent.id !== this.props.selectedStudent.id) ) {
             this.setState( { selectedStudent: this.props } );
-        //     this.setState( {dede : false});
-        // }
-        //infinite loop!!!!! TODO:Fix
+          }
       }
    
   }
