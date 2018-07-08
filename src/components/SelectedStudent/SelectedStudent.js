@@ -19,11 +19,25 @@ class SelectedStudent extends Component {
   }
 
   deletePostHandler = () => {
-    axios.delete("/posts/" + this.props.id).then(response => {
+    axios.delete('/students.json' + this.state.selectedStudent.id).then(response => {
       console.log(response);
     });
   };
 
+///TODO:
+
+  handleRemove() {
+    return firebase.database().ref('items').child('ITEM_KEY').remove();
+}
+
+handleUpdate() {
+  var updates = {};
+  updates['/id'] = 1;
+  updates['/title'] = 'Apple';
+
+  return firebase.database().ref('items').child('ITEM_KEY').update(updates);
+}
+//TODO://
   render() {
     let post = <p style={{ textAlign: "center" }}>Please select a Student!</p>;
     if (this.props.id) {
