@@ -29,7 +29,7 @@ class School extends Component {
                 
             })
             .catch(error => {
-                // console.log(error);
+                
                 this.setState({ error: true });
             });
     }
