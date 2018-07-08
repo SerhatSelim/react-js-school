@@ -4,12 +4,12 @@ import StudentList from '../../components/StudentList/StudentList';
 import './School.css';
 import Aux from '../../hoc/Auxiliary/Aux_';
 import NewStudent from '../../components/NewStudent/NewStudent';
-
+import SelectedStudent from '../../components/SelectedStudent/SelectedStudent';
 
 class School extends Component {
     state = {
         studentList: [],
-        selectedStudentId: null,
+        selectedStudent: null,
         add: false,
         error: false
     }
@@ -20,7 +20,8 @@ class School extends Component {
                 //   const studentList = response.data.slice(0, 4);
                 const keys = Object.keys(response.data)
                 const students = response.data
-                const studentList = keys.map(key=> ({
+                const studentList = keys.map((key,index)=> ({
+                    id: keys[index],
                     name: students[key].name, 
                     surname: students[key].surname,
                     faculty: students[key].faculty,
@@ -34,8 +35,8 @@ class School extends Component {
             });
     }
 
-    studentSelectedHandler = (id) => {
-        this.setState({ selectedStudentId: id });
+    studentSelectedHandler = (st) => {
+        this.setState({ selectedStudent: st });
     }
 
    
@@ -50,7 +51,7 @@ class School extends Component {
                     surname={st.surname}
                     faculty={st.faculty}
                     department={st.department}
-                    clicked={() => this.studentSelectedHandler(st.id)} />;
+                    clicked={() => this.studentSelectedHandler(st)} />;
             });
         }
 
@@ -60,6 +61,7 @@ class School extends Component {
                 <section className="Students">
                     {studentList}
                 </section>
+                <SelectedStudent selectedStudent={this.state.selectedStudent}/>
                 <NewStudent />
                
 
