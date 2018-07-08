@@ -11,8 +11,7 @@ class SelectedStudent extends Component {
   componentDidUpdate() {
     
         if (this.props.selectedStudent !== null) {
-          if ( !this.state.selectedStudent || (
-            this.state.selectedStudent.selectedStudent && this.state.selectedStudent.selectedStudent.id !== this.props.selectedStudent.id) ) {
+          if ( !this.state.selectedStudent || (this.state.selectedStudent.selectedStudent && this.state.selectedStudent.selectedStudent.id !== this.props.selectedStudent.id) ) {
             this.setState( { selectedStudent: this.props } );
           }
       }
