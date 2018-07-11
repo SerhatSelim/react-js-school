@@ -26,17 +26,17 @@ class SelectedStudent extends Component {
 
 ///TODO:
 
-  handleRemove() {
-    return firebase.database().ref('items').child('ITEM_KEY').remove();
-}
+//   handleRemove() {
+//     return firebase.database().ref('items').child('ITEM_KEY').remove();
+// }
 
-handleUpdate() {
-  var updates = {};
-  updates['/id'] = 1;
-  updates['/title'] = 'Apple';
+// handleUpdate() {
+//   var updates = {};
+//   updates['/id'] = 1;
+//   updates['/title'] = 'Apple';
 
-  return firebase.database().ref('items').child('ITEM_KEY').update(updates);
-}
+//   return firebase.database().ref('items').child('ITEM_KEY').update(updates);
+// }
 //TODO://
   render() {
     let post = <p style={{ textAlign: "center" }}>Please select a Student!</p>;
