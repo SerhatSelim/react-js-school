@@ -1,73 +1,70 @@
-import React, { Component } from 'react';
-import axios from '../../axios';
-import StudentList from '../../components/StudentList/StudentList';
-import './School.css';
-import Aux from '../../hoc/Auxiliary/Aux_';
-import NewStudent from '../../components/NewStudent/NewStudent';
-import SelectedStudent from '../../components/SelectedStudent/SelectedStudent';
+import React, { Component } from "react";
+import axios from "../../axios";
+import StudentList from "../../components/StudentList/StudentList";
+import "./School.css";
+import Aux from "../../hoc/Auxiliary/Aux_";
+import NewStudent from "../../components/NewStudent/NewStudent";
+import SelectedStudent from "../../components/SelectedStudent/SelectedStudent";
+import { Route, NavLink, Switch, Redirect } from "react-router-dom";
+import asyncComponent from "../../hoc/asyncComponent/asyncComponent";
+
+const AsyncNewStudent = asyncComponent(() => {
+  return import("../../components/NewStudent/NewStudent.js");
+});
 
 class School extends Component {
-    state = {
-        studentList: [],
-        selectedStudent: null,
-        add: false,
-        error: false
-    }
+  state = {
+    studentList: [],
+    selectedStudent: null,
+    add: false,
+    error: false,
+    auth: true
+  };
 
-    componentDidMount() {
-        axios.get('/students.json')
-            .then(response => {
-                //   const studentList = response.data.slice(0, 4);
-                const keys = Object.keys(response.data)
-                const students = response.data
-                const studentList = keys.map((key,index)=> ({
-                    id: keys[index],
-                    name: students[key].name, 
-                    surname: students[key].surname,
-                    faculty: students[key].faculty,
-                    department: students[key].department }))
-                this.setState({ studentList });
-                
-            })
-            .catch(error => {
-                
-                this.setState({ error: true });
-            });
-    }
-
-    studentSelectedHandler = (st) => {
-        this.setState({ selectedStudent: st });
-    }
-
-   
-
-    render() {
-        let studentList = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
-        if (!this.state.error) {
-            studentList = this.state.studentList.map(st => {
-                return <StudentList
-                    key={st.id}
-                    name={st.name}
-                    surname={st.surname}
-                    faculty={st.faculty}
-                    department={st.department}
-                    clicked={() => this.studentSelectedHandler(st)} />;
-            });
-        }
-
-        return (
-            <Aux>
-               
-                <section className="Students">
-                    {studentList}
-                </section>
-                <SelectedStudent selectedStudent={this.state.selectedStudent}/>
-                <NewStudent />
-               
-
-            </Aux>
-        );
-    }
+  render() {
+    return (
+      <div className="School">
+        <header>
+          <nav>
+            <ul>
+              <li>
+                <NavLink
+                  to="/students/"
+                  exact
+                  activeClassName="my-active"
+                  activeStyle={{
+                    color: "#fa923f",
+                    textDecoration: "underline"
+                  }}
+                >
+                  Students
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to={{
+                    pathname: "/new-student",
+                    hash: "#submit",
+                    search: "?quick-submit=true"
+                  }}
+                >
+                  New Student
+                </NavLink>
+              </li>
+            </ul>
+          </nav>
+        </header>
+        <Switch>
+          {this.state.auth ? (
+            <Route path="/new-student" component={AsyncNewStudent} />
+          ) : null}
+          <Route path="/students" component={StudentList} />
+          <Route render={() => <h1>Not found</h1>} />
+        </Switch>
+      </div>
+    );
+  }
 }
 
 export default School;
+
