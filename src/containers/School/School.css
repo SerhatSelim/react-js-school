@@ -41,3 +41,27 @@
 .OrderButton:not(:disabled) {
     animation: enable 0.3s linear;
 }
+
+.School ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.School li {
+    display: inline-block;
+    margin: 20px;
+}
+
+.School a {
+    text-decoration: none;
+    color: black;
+}
+
+.School a:hover,
+.School a:active,
+.School a.active {
+    color: #fa923f;
+}
