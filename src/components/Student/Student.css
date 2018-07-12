@@ -18,11 +18,3 @@
     margin: 16px 0;
     color: #ccc;
 }
-
-.StudentList {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    width: 80%;
-    margin: auto;
-}

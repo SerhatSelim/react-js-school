@@ -1,8 +1,8 @@
 // Import the Firebase modules that you need in your app.
 import firebase from 'firebase/app';
-import auth from 'firebase/auth';
-import database from 'firebase/database'
-import datastore from 'firebase/storage';
+import 'firebase/auth';
+import 'firebase/database'
+import 'firebase/storage';
 
 // Initalize and export Firebase.
 var config = {

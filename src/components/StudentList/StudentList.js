@@ -3,6 +3,7 @@ import axios from "../../axios";
 import SelectedStudent from "../../components/SelectedStudent/SelectedStudent";
 import Student from "../Student/Student";
 import "./StudentList.css";
+import { Route } from 'react-router-dom';
 
 class StudentList extends Component {
   state = {
@@ -13,9 +14,10 @@ class StudentList extends Component {
     auth: true
   };
 
-  studentSelectedHandler = st => {
-    this.setState({ selectedStudent: st });
-  };
+  studentSelectedHandler = ( id, st ) => {
+    this.setState({ selectedStudent: st });    
+    this.props.history.push( '/students/' + id );
+}
 
   componentDidMount() {
     axios
@@ -38,7 +40,41 @@ class StudentList extends Component {
       });
   }
 
-  render() {
+  render () {
+    let studentList = <p style={{ textAlign: 'center' }}>Something went wrong!</p>;
+    if ( !this.state.error ) {
+      studentList = this.state.studentList.map( st => {
+            return (
+                <Student
+                    key={st.id}
+                    name={st.name}
+                    faculty={st.faculty}
+                    department={st.department}
+                    surname={st.name}
+                    clicked={() => this.studentSelectedHandler( st.id, st )} />
+            );
+        } );
+    }
+
+    return (
+        <div>
+            <section className="StudentList">
+                {studentList}
+            </section>
+            <Route path={this.props.match.url + '/:id'} 
+                   render={(props) => <SelectedStudent 
+                    selectedStudent={this.state.selectedStudent}
+                    {...props} />} 
+                   exact/>
+        </div>
+    );
+}
+ 
+}
+export default StudentList;
+
+/*
+ render() {
     return (
     <div>
     <SelectedStudent selectedStudent={this.state.selectedStudent}/>
@@ -62,6 +98,4 @@ class StudentList extends Component {
     </div>
     )
 }
-}
-export default StudentList;
-
+ */
