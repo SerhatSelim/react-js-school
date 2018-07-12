@@ -1,14 +1,9 @@
 import React, { Component } from "react";
-import axios from "../../axios";
 import StudentList from "../../components/StudentList/StudentList";
 import "./School.css";
-import Aux from "../../hoc/Auxiliary/Aux_";
-import NewStudent from "../../components/NewStudent/NewStudent";
-import SelectedStudent from "../../components/SelectedStudent/SelectedStudent";
-import { Route, NavLink, Switch, Redirect } from "react-router-dom";
+import { Route, NavLink, Switch } from "react-router-dom";
 import asyncComponent from "../../hoc/asyncComponent/asyncComponent";
 import routes from "../../hoc/Routing/DynamicRouting";
-// import firebase from "../../config/firebase";
 
 const AsyncNewStudent = asyncComponent(() => {
   return import("../../components/NewStudent/NewStudent.js");
@@ -20,27 +15,14 @@ class School extends Component {
     studentsPath: " ",
     studentList: [],
     selectedStudent: null,
-    add: false,
     error: false,
     auth: true
   };
 
   constructor(props) {
     super(props);
-    // Don't call this.setState() here!
     this.initRoutePats();
   }
-
-  ///////firebase RUN!
-  // componentDidMount(){
-  //   this.firebaseRef = firebase.database().ref('/students');
-  //   this.firebaseCallback = this.firebaseRef.on('value', (st) => { 
-  //     console.log(JSON.stringify(st, null, 2)) 
-  //     const keys = Object.keys(st.val())    
-  //     const values = keys.map(key => st.val()[key])
-  //     this.setState({ studentList: values });
-  //   });
-  // }
 
   initRoutePats() {
     this.state.newStudentPath = routes.NewStudent;
@@ -82,7 +64,6 @@ class School extends Component {
         </header>
         <Switch>
           {this.state.auth ? (
-            // <Route path="/new-student" component={AsyncNewStudent} />
             <Route
               path={this.state.newStudentPath}
               component={AsyncNewStudent}
@@ -97,3 +78,16 @@ class School extends Component {
 }
 
 export default School;
+
+// import firebase from "../../config/firebase";
+
+  ///////firebase RUN!
+  // componentDidMount(){
+  //   this.firebaseRef = firebase.database().ref('/students');
+  //   this.firebaseCallback = this.firebaseRef.on('value', (st) => { 
+  //     console.log(JSON.stringify(st, null, 2)) 
+  //     const keys = Object.keys(st.val())    
+  //     const values = keys.map(key => st.val()[key])
+  //     this.setState({ studentList: values });
+  //   });
+  // }
