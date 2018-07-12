@@ -70,7 +70,7 @@ class School extends Component {
             />
           ) : null}
           <Route path={this.state.studentsPath} component={StudentList} />
-          <Route render={() => <h1>Not found</h1>} />
+          <Route render={() => <h2 className="Title">Welcome My React Project</h2>} />
         </Switch>
       </div>
     );

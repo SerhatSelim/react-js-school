@@ -1,47 +1,3 @@
-.Students {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    width: 80%;
-    margin: auto;
-}
-
-
-
-.OrderButton {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: center;
-    width: 80%;
-    margin: auto;
-    background-color: #DAD735;
-    outline: none;
-    cursor: pointer;
-    border: 1px solid #966909;
-    color: #966909;
-    font-family: inherit;
-    font-size: 1.2em;
-    padding: 15px 30px;
-    box-shadow: 2px 2px 2px #966909;
-}
-
-.OrderButton:hover, .OrderButton:active {
-    background-color: #A0DB41;
-    border: 1px solid #966909;
-    color: #966909;
-}
-
-.OrderButton:disabled {
-    background-color: #C7C6C6;
-    cursor: not-allowed;
-    border: 1px solid #ccc;
-    color: #888888;
-}
-
-.OrderButton:not(:disabled) {
-    animation: enable 0.3s linear;
-}
-
 .School ul {
     list-style: none;
     margin: 0;
@@ -64,4 +20,9 @@
 .School a:active,
 .School a.active {
     color: #fa923f;
+}
+
+.Title {
+    color: #873ffa;    
+    text-align: center
 }
