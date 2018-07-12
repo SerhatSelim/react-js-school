@@ -7,6 +7,7 @@ import NewStudent from "../../components/NewStudent/NewStudent";
 import SelectedStudent from "../../components/SelectedStudent/SelectedStudent";
 import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../../hoc/asyncComponent/asyncComponent";
+import routes from "../../hoc/Routing/DynamicRouting";
 
 const AsyncNewStudent = asyncComponent(() => {
   return import("../../components/NewStudent/NewStudent.js");
@@ -14,12 +15,25 @@ const AsyncNewStudent = asyncComponent(() => {
 
 class School extends Component {
   state = {
+    newStudentPath: " ",
+    studentsPath: " ",
     studentList: [],
     selectedStudent: null,
     add: false,
     error: false,
     auth: true
   };
+
+  constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    this.initRoutePats();
+  }
+
+  initRoutePats() {
+    this.state.newStudentPath = routes.NewStudent;
+    this.state.studentsPath = routes.StudentList;
+  }
 
   render() {
     return (
@@ -29,7 +43,7 @@ class School extends Component {
             <ul>
               <li>
                 <NavLink
-                  to="/students/"
+                  to={this.state.studentsPath}
                   exact
                   activeClassName="my-active"
                   activeStyle={{
@@ -43,7 +57,7 @@ class School extends Component {
               <li>
                 <NavLink
                   to={{
-                    pathname: "/new-student",
+                    pathname: this.state.newStudentPath,
                     hash: "#submit",
                     search: "?quick-submit=true"
                   }}
@@ -56,9 +70,13 @@ class School extends Component {
         </header>
         <Switch>
           {this.state.auth ? (
-            <Route path="/new-student" component={AsyncNewStudent} />
+            // <Route path="/new-student" component={AsyncNewStudent} />
+            <Route
+              path={this.state.newStudentPath}
+              component={AsyncNewStudent}
+            />
           ) : null}
-          <Route path="/students" component={StudentList} />
+          <Route path={this.state.studentsPath} component={StudentList} />
           <Route render={() => <h1>Not found</h1>} />
         </Switch>
       </div>
@@ -67,4 +85,3 @@ class School extends Component {
 }
 
 export default School;
-
