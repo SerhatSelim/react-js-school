@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "../../axios";
 import SelectedStudent from "../../components/SelectedStudent/SelectedStudent";
-
+import Student from "../Student/Student";
 import "./StudentList.css";
 
 class StudentList extends Component {
@@ -41,7 +41,7 @@ class StudentList extends Component {
   render() {
     return (
     <div>
-                    <SelectedStudent selectedStudent={this.state.selectedStudent}/>
+    <SelectedStudent selectedStudent={this.state.selectedStudent}/>
        
     {
         this.state.error &&
@@ -49,15 +49,13 @@ class StudentList extends Component {
     }
     { !this.state.error &&
       this.state.studentList.map(st => (
-          <div className="Students">
-        <div className="StudentList" onClick={() => this.studentSelectedHandler(st)}>
-             <h5>Name: {st.name}</h5>
-             <h5>Surname: {st.surname}</h5>
-             <h5 className="Faculty">Faculty: {st.faculty}</h5>  
-             <h5 className="Department">Department: {st.department}</h5>
-        </div>
-        </div>
-
+        <Student  
+        clicked={() => this.studentSelectedHandler(st)}
+        key={st.id}      
+        name={st.name}
+        surname={st.surname}
+        faculty={st.faculty}
+        department={st.department}/>
       ))
     }
 
