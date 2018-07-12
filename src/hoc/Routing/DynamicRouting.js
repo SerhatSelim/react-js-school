@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import React from "react";
 
-class DynamicRouting extends Component{
-    
-}
+const routes = {
+  StudentList: "/students",
+  NewStudent: "/newStudent"
+};
 
-export default withRouter(DynamicRouting);
+export default routes;
