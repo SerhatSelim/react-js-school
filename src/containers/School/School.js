@@ -8,6 +8,7 @@ import SelectedStudent from "../../components/SelectedStudent/SelectedStudent";
 import { Route, NavLink, Switch, Redirect } from "react-router-dom";
 import asyncComponent from "../../hoc/asyncComponent/asyncComponent";
 import routes from "../../hoc/Routing/DynamicRouting";
+// import firebase from "../../config/firebase";
 
 const AsyncNewStudent = asyncComponent(() => {
   return import("../../components/NewStudent/NewStudent.js");
@@ -29,6 +30,17 @@ class School extends Component {
     // Don't call this.setState() here!
     this.initRoutePats();
   }
+
+  ///////firebase RUN!
+  // componentDidMount(){
+  //   this.firebaseRef = firebase.database().ref('/students');
+  //   this.firebaseCallback = this.firebaseRef.on('value', (st) => { 
+  //     console.log(JSON.stringify(st, null, 2)) 
+  //     const keys = Object.keys(st.val())    
+  //     const values = keys.map(key => st.val()[key])
+  //     this.setState({ studentList: values });
+  //   });
+  // }
 
   initRoutePats() {
     this.state.newStudentPath = routes.NewStudent;

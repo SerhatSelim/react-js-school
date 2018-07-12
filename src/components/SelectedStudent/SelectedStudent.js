@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import firebase from "../../config/firebase";
 import "./SelectedStudent.css";
 
 class SelectedStudent extends Component {
@@ -19,9 +19,10 @@ class SelectedStudent extends Component {
   }
 
   deletePostHandler = () => {
-    axios.delete('/students.json' + this.state.selectedStudent.id).then(response => {
-      console.log(response);
-    });
+    console.log(this.state.selectedStudent);
+    const id = this.state.selectedStudent.selectedStudent.id;
+    
+     return firebase.database().ref('students').child(id).remove();
   };
 
 ///TODO:
@@ -62,22 +63,3 @@ class SelectedStudent extends Component {
 }
 
 export default SelectedStudent;
-
-// let post = <p style={{ textAlign: "center" }}>Please select a Student!</p>;
-// if (this.props.id) {
-//   post = <p style={{ textAlign: "center" }}>Loading...!</p>;
-// }
-// if (this.state.selectedStudent) {
-//   post = (
-//     <div className="SelectedStudent">
-//       <h1>{this.state.selectedStudent.name}</h1>
-//       <p>{this.state.selectedStudent.surname}</p>
-//       <div className="Edit">
-//         <button onClick={this.deletePostHandler} className="Delete">
-//           Delete
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-// return post;
