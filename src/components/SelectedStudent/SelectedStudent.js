@@ -24,21 +24,6 @@ class SelectedStudent extends Component {
     
      return firebase.database().ref('students').child(id).remove();
   };
-
-///TODO:
-
-//   handleRemove() {
-//     return firebase.database().ref('items').child('ITEM_KEY').remove();
-// }
-
-// handleUpdate() {
-//   var updates = {};
-//   updates['/id'] = 1;
-//   updates['/title'] = 'Apple';
-
-//   return firebase.database().ref('items').child('ITEM_KEY').update(updates);
-// }
-//TODO://
   render() {
     let post = <p style={{ textAlign: "center" }}>Please select a Student!</p>;
     if (this.props.id) {
@@ -63,3 +48,19 @@ class SelectedStudent extends Component {
 }
 
 export default SelectedStudent;
+
+
+///TODO:
+
+//   handleRemove() {
+//     return firebase.database().ref('items').child('ITEM_KEY').remove();
+// }
+
+// handleUpdate() {
+//   var updates = {};
+//   updates['/id'] = 1;
+//   updates['/title'] = 'Apple';
+
+//   return firebase.database().ref('items').child('ITEM_KEY').update(updates);
+// }
+//TODO://
