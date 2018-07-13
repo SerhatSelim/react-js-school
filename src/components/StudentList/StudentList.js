@@ -50,7 +50,7 @@ class StudentList extends Component {
                     name={st.name}
                     faculty={st.faculty}
                     department={st.department}
-                    surname={st.name}
+                    surname={st.surname}
                     clicked={() => this.studentSelectedHandler( st.id, st )} />
             );
         } );
