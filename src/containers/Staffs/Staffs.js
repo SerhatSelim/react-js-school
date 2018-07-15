@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Person from '../../components/Staff/Staff';
-import AddPerson from '../../components/NewStaff/NewStaff';
+import Staff from '../../components/Staff/Staff';
+import NewStaff from '../../components/NewStaff/NewStaff';
 import * as actionTypes from '../../store/actions';
 
-class Persons extends Component {
-    
-    render () {
+class Staffs extends Component {
+
+    render() {
         return (
             <div>
-                <AddPerson personAdded={this.props.onAddedPerson} />
-                {this.props.prs.map(person => (
-                    <Person 
-                        key={person.id}
-                        name={person.name} 
-                        age={person.age} 
-                        clicked={() => this.props.onRemovedPerson(person.id)}/>
+                <NewStaff staffAdded={this.props.onAddedStaff} />
+                {this.props.stff.map(staff => (
+                    <Staff
+                        key={staff.id}
+                        name={staff.name}
+                        surname={staff.surname}
+                        faculty={staff.faculty}
+                        department={staff.department}
+                        clicked={() => this.props.onRemovedStaff(staff.id)} />
                 ))}
             </div>
         );
@@ -25,15 +27,19 @@ class Persons extends Component {
 
 const mapStateToProps = state => {
     return {
-        prs: state.persons
+        stff: state.staffs
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAddedPerson: (name, age) => dispatch({type: actionTypes.ADD_PERSON, personData: {name: name, age: age}}),
-        onRemovedPerson: (id) => dispatch({type: actionTypes.REMOVE_PERSON, personId: id})
+        onAddedStaff: (name, surname, faculty, department) =>
+            dispatch({
+                type: actionTypes.ADD_PERSON,
+                staffData: { name: name, surname: surname, faculty: faculty, department: department }
+            }),
+        onRemovedStaff: (id) => dispatch({ type: actionTypes.REMOVE_PERSON, personId: id })
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Persons);
+export default connect(mapStateToProps, mapDispatchToProps)(Staffs);
