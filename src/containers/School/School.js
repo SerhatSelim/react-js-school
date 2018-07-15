@@ -4,6 +4,7 @@ import "./School.css";
 import { Route, NavLink, Switch } from "react-router-dom";
 import asyncComponent from "../../hoc/asyncComponent/asyncComponent";
 import routes from "../../hoc/Routing/DynamicRouting";
+import Staffs from "../Staffs/Staffs";
 
 const AsyncNewStudent = asyncComponent(() => {
   return import("../../components/NewStudent/NewStudent.js");
@@ -13,6 +14,7 @@ class School extends Component {
   state = {
     newStudentPath: " ",
     studentsPath: " ",
+    staffsPath: " ",
     studentList: [],
     selectedStudent: null,
     error: false,
@@ -27,6 +29,7 @@ class School extends Component {
   initRoutePats() {
     this.state.newStudentPath = routes.NewStudent;
     this.state.studentsPath = routes.StudentList;
+    this.state.staffsPath = routes.Staffs;
   }
 
   render() {
@@ -59,6 +62,16 @@ class School extends Component {
                   New Student
                 </NavLink>
               </li>
+              <li>
+                <NavLink
+                  to={{
+                    pathname: this.state.staffsPath,
+                    
+                  }}
+                >
+                  Staffs
+                </NavLink>
+              </li>
             </ul>
           </nav>
         </header>
@@ -70,6 +83,7 @@ class School extends Component {
             />
           ) : null}
           <Route path={this.state.studentsPath} component={StudentList} />
+          <Route path={this.state.staffsPath} component={Staffs}/>
           <Route render={() => <h2 className="Title">Welcome My React Project</h2>} />
         </Switch>
       </div>

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import { BrowserRouter } from 'react-router-dom';
+// import { BrowserRouter } from 'react-router-dom';
 import School from './containers/School/School';
 
 class App extends Component {
   render() {
     return (
-      <BrowserRouter>
+      // <BrowserRouter> TODO: Layout eklenecek!
 
       <div className="App">
         <School />
       </div>
-      </BrowserRouter>
+      // </BrowserRouter>
 
     );
   }
